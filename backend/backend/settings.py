@@ -25,8 +25,13 @@ SECRET_KEY = 'django-insecure-^xpx_04f6spndu9nr-an59^21k2-$^wzwvrf=57c8)n%(7!ea4
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = [
+    "jobportal-1-m00k.onrender.com",
+    "jobportal-2-hl7t.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -54,11 +59,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://jobportal-2-hl7t.onrender.com",
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS = ['*']
-CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+CSRF_TRUSTED_ORIGINS = [
+    "https://jobportal-2-hl7t.onrender.com",
+]
+
+
+
 
 CSRF_TRUSTED_ORIGINS = [
     "https://jobportal-2-hl7t.onrender.com",
@@ -126,10 +138,23 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Database (Render PostgreSQL)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
+#import dj_database_url
+#import os
+
+# Database (Render + Local compatible)
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL:
+    # Production (Render PostgreSQL)
+    DATABASES = {
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    }
+else:
+    # Local development (SQLite)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
