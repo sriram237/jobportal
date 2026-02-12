@@ -19,8 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # connect api routes
-    path('', include('backend.api_urls')),
+    path('', include('backend.api_urls')),  # <-- THIS LINE IS THE FIX
 ]
-
