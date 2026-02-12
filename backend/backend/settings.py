@@ -143,15 +143,11 @@ STATIC_URL = 'static/'
 
 # Database (Render + Local compatible)
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-if DATABASE_URL:
-    # Production (Render PostgreSQL)
+if os.environ.get("DATABASE_URL"):
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+        'default': dj_database_url.config(conn_max_age=600)
     }
 else:
-    # Local development (SQLite)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
