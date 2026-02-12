@@ -1,10 +1,10 @@
 
 import { useState } from 'react'
 import './App.css'
-import Registerpage from './registerpage'
-import LoginPage from './LoginPage'
-import JobListPage from './jobListPage'
-import ApplyJobPage from './ApplyJobPage'
+import Registerpage from './Registerpage.jsx'
+import LoginPage from './LoginPage.jsx'
+import JobListPage from './jobListPage.jsx'
+import ApplyJobPage from './ApplyJobPage.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
