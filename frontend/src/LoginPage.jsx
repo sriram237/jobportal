@@ -1,3 +1,5 @@
+
+import API_BASE from "./api";
 import React, { useEffect } from "react";
 import { useActionState } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -5,7 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 async function loginAction(_, formData) {
   const json = Object.fromEntries(formData);
 
-  const res = await fetch("http://127.0.0.1:8000/login/", {
+  const res = await fetch(`${API_BASE}/login/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

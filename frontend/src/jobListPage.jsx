@@ -1,3 +1,5 @@
+import API_BASE from "./api";
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,7 +10,8 @@ export default function JobListPage() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/jobs/")
+    fetch(fetch(`${API_BASE}/jobs/`)
+)
       .then(res => res.json())
       .then(setJobs)
       .catch(err => console.error("Failed to fetch jobs:", err));

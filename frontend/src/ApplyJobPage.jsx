@@ -1,3 +1,5 @@
+import API_BASE from "./api";
+
 import { useEffect, useState } from "react";
 import { useActionState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -5,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 async function applyjobAction(_, formData) {
   const loggedUser = JSON.parse(localStorage.getItem("user"));
 
-  const res = await fetch("http://127.0.0.1:8000/apply/", {
+  const res = await fetch(`${API_BASE}/apply/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
